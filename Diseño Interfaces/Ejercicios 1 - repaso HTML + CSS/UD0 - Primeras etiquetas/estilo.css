@@ -1,0 +1,30 @@
+*{
+    background-color: rgb(170, 185, 180);
+}
+
+.centrarTitulos{
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.centrar{
+    text-align: center;
+    color: red;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.izquierda{
+    text-align: left;
+    color: blue;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.derecha{
+    text-align: right;
+    color: green;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.pie{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serifç;
+}
