@@ -1,0 +1,14 @@
+services:   
+  servicio_php-apache-xdebug:
+    container_name: Clase  
+    build: .
+    volumes:
+      # Montamos a web desde fóra no directorio web do contenedor
+      - ./www:/var/www/html
+      - ./xdebug:/var/logs/xdebug
+    ports:
+      - 8081:80
+
+    
+    
+
