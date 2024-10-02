@@ -1,0 +1,53 @@
+
+<!DOCTYPE html >
+<html >
+	<head>
+		<meta charset="UTF-8">
+		<title>Calculadora con PHP</title>
+		<link rel="stylesheet" type="text/css" href="estilosFuncions.css"/>
+	</head>
+
+	<body>
+		<div id="todo">
+			<aside>
+				<h2>Calculadora con PHP</h2>
+
+				<form action="funcionsPHP.php" method="GET">
+					<h3>Incógnitas</h3>
+
+					<div id="contenedorIncognitas">
+						<div class="divIncognitas"><label for="n1">n1</label><input type="number" name="n1" id="n1"/></div>
+						<div  class="divIncognitas"><label for="n1">n2</label><input type="number" name="n2" id="n2"/></div>
+						<div class="divIncognitas"><label for="n1">n3</label><input type="number" name="n3" id="n3"/></div>
+						<div class="divIncognitas"><label for="n1">n4</label><input type="number" name="n4" id="n4"/></div>
+					</div>
+
+					<h3>Botóns</h3>
+
+					<div id="contenedorBotons">
+						<button id="suma2" type="submit" name="operacion" value="suma2" >Suma 2 valores</button>
+						<button id="suma3" type="submit" name="operacion" value="suma3"  >Suma 3 valores</button>
+						<button id="suma4" type="submit" name="operacion" value="suma4" >Suma 4 valores</button>
+						<button id="multiplica2" type="submit" name="operacion" value="multiplica2">Multiplica 2 valores</button>
+						<button id="multiplica3"  type="submit" name="operacion" value="multiplica3">Multiplica 3 valores</button>
+						<button id="multiplica4" type="submit" name="operacion" value="multiplica4">Multiplica 4 valores</button>
+						<button id="maior" type="submit" name="operacion" value="maior">Maior</button>
+						<button id="menor" type="submit" name="operacion" value="menor">Menor</button>
+						<button id="media" type="submit" name="operacion" value="media">Media</button>
+						<button id="factorialN3"  type="submit" name="operacion" value="factorialN3">Factorial de n3</button>
+						<button id="segundoMaior" type="submit" name="operacion" value="segundoMaior">2º maior de todos</button>
+						<button id="mediana" type="submit" name="operacion" value="mediana">Mediana</button>
+						<button id="ordearMarioMenor" type="submit" name="operacion" value="ordearMarioMenor">Ordear de maior a menor</button>
+						<button id="ordearManorMaior" type="submit" name="operacion" value="ordearManorMaior">Ordear de menor a maior</button>
+					</div>
+
+					<div>
+						<p>O resultado é </p>
+					</div>
+
+				</form>
+
+			</aside>
+		</div>
+	</body>
+</html>
