@@ -4,7 +4,7 @@ function menorAmaior($a,$b)
 {
     if($a>$b)
         return -1;
-    elseif ($a>$b)
+    elseif ($a<$b)
         return 1;
     else
         return 0;
