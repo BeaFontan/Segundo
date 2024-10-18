@@ -1,8 +1,6 @@
-version: "3"
-
-services:
+services:   
   servicio_php-apache-xdebug:
-    container_name: Clase
+    container_name: php8.0-apache-mysql-XDebug  
     build: .
     volumes:
       # Montamos a web desde fóra no directorio web do contenedor
@@ -12,7 +10,7 @@ services:
       - 8081:80
 
   db:
-    container_name: dbXdebug
+    container_name: dbXDebug
     image: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -20,8 +18,9 @@ services:
       MYSQL_USER: usuario
       MYSQL_PASSWORD: abc123.
     ports:
-      - 9906:3306
-
+     - 9906:3306
+    volumes:
+      - persistente:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin
@@ -29,3 +28,9 @@ services:
       - 8000:80
     environment:
       - PMA_ARBITRARY=1
+
+volumes:
+  persistente:
+    
+    
+
