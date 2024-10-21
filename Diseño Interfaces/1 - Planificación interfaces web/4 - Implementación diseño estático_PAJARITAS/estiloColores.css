@@ -1,0 +1,30 @@
+.container{
+    width: 100%;
+    display: flex;
+}
+
+.container > div {
+    width: 250px;
+    height: 250px;
+    flex-direction: row;
+}
+
+.blanco {
+    background-color: #FFFFFF;
+}
+
+.negro {
+    background-color: #333333;
+}
+
+.azul {
+    background-color: #1F4E79;
+}
+
+.amarillo {
+    background-color: #F2C94C;
+}
+
+.gris {
+    background-color: #F0F0F0;
+}
