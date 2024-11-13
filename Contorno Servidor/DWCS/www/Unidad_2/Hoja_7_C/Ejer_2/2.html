@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="2.php" method="GET">
+      <label for="cadea">Introduce a cadea de texto:</label><br/>
+      <textarea id="cadea" name="cadea"></textarea><br/><br/>
+      <label for="funcionsCadea">Escolle unha opción: </label>
+      <select name="funcionsCadea" id="funcionsCadea">
+        <option value="stripcslashes">stripcslashes()</option>
+        <option value="urlencode">urlencode()</option>
+        <option value="urlcode">urlcode()</option>
+        <option value="nl2br">nl2br()</option>
+      </select>
+
+      <button>Enviar</button>
+    </form>
+  </body>
+</html>

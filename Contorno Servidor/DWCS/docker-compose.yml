@@ -1,0 +1,36 @@
+services:   
+  servicio_php-apache-xdebug:
+    container_name: php8.0-apache-mysql-XDebug  
+    build: .
+    volumes:
+      # Montamos a web desde fóra no directorio web do contenedor
+      - ./www:/var/www/html
+      - ./xdebug:/var/logs/xdebug
+    ports:
+      - 8081:80
+
+  db:
+    container_name: dbXDebug
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: proba
+      MYSQL_USER: usuario
+      MYSQL_PASSWORD: abc123.
+    ports:
+     - 9906:3306
+    volumes:
+      - persistente:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8000:80
+    environment:
+      - PMA_ARBITRARY=1
+
+volumes:
+  persistente:
+    
+    
+
