@@ -1,0 +1,52 @@
+<!--Beatriz Fontán Padín -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript</title>
+    <script type="text/javascript" src="TA_error.js"></script>
+</head>
+<body>
+    <h1>Error</h1>
+    <p>Ingrese un número impar en el rango de 1 a 40:</p>
+    <input id="num" type="text">
+    <button type="button" onclick="checkErrors()">Verificar</button>
+    <p id="result"></p>
+
+    <script>
+        function checkErrors() {//Función que llama el botón una vez se envia el formulario con el dato
+            const p = document.getElementById("result"); //variable de resultado
+            const numero = document.getElementById("num").value; //Valor que nos introduce el usuario por el input
+            let numeroEntero;
+
+            try {
+                // Validar si introducen algo que no sea un número
+                if (isNaN(numero)) {
+                    throw new TypeError("Debe ingresar un número.");
+
+                } else {
+                    numeroEntero = parseInt(numero);
+                    //Validamos el rango de números correcto
+
+                    if (numeroEntero < 1 || numeroEntero > 40) {
+                        throw new RangeError("Número fuera de rango. Debe estar entre 1 y 40.");
+                    }
+                    // Validamos si es el usuario introduce un número par
+                    if (numeroEntero % 2 === 0) {
+                        throw new Error("Debe ingresar un número impar.");
+                    }
+                }
+
+                // Si pasa todas las validaciones
+                p.textContent = "Número en el rango e impar: " + numeroEntero;//Mostramos en el elmento de resultado que ha sido correcto y es un número en el rango y es impar
+                p.style.color = "green";
+
+            } catch (e) {
+                p.textContent = e.message; // Muestra el mensaje de error si no pasa alguna de las validaciones
+                p.style.color = "red";
+                
+            }
+        }
+    </script>
+</body>
+</html>
