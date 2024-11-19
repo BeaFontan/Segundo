@@ -3,49 +3,61 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>JavaScript</title>
-    <script type="text/javascript" src="TA_error.js"></script>
+    <title>Validación de Números</title>
 </head>
 <body>
-    <h1>Error</h1>
-    <p>Ingrese un número impar en el rango de 1 a 40:</p>
-    <input id="num" type="text">
-    <button type="button" onclick="checkErrors()">Verificar</button>
-    <p id="result"></p>
+    <h1>Validación de Números</h1>
+    <form id="numeroForm" onsubmit="return validarNumero();">
+        <label for="numero">Introduce un número:</label>
+        <input type="text" id="numero" placeholder="Ejemplo: 1+5">
+        <button type="submit">Validar</button>
+    </form>
+    <p>Resultado: <span id="resultado">...</span></p>
 
     <script>
-        function checkErrors() {//Función que llama el botón una vez se envia el formulario con el dato
-            const p = document.getElementById("result"); //variable de resultado
-            const numero = document.getElementById("num").value; //Valor que nos introduce el usuario por el input
-            let numeroEntero;
+        function validarNumero() {
+            const input = document.getElementById("numero").value.trim(); // Obtenemos el valor del input
+            const resultado = document.getElementById("resultado"); // Elemento para mostrar el resultado
 
             try {
-                // Validar si introducen algo que no sea un número
-                if (isNaN(numero)) {
-                    throw new TypeError("Debe ingresar un número.");
-
-                } else {
-                    numeroEntero = parseInt(numero);
-                    //Validamos el rango de números correcto
-
-                    if (numeroEntero < 1 || numeroEntero > 40) {
-                        throw new RangeError("Número fuera de rango. Debe estar entre 1 y 40.");
-                    }
-                    // Validamos si es el usuario introduce un número par
-                    if (numeroEntero % 2 === 0) {
-                        throw new Error("Debe ingresar un número impar.");
-                    }
+                // Verificar si el campo está vacío
+                if (input === "") {
+                    throw new Error("El campo no puede estar vacío.");
                 }
 
-                // Si pasa todas las validaciones
-                p.textContent = "Número en el rango e impar: " + numeroEntero;//Mostramos en el elmento de resultado que ha sido correcto y es un número en el rango y es impar
-                p.style.color = "green";
+                // Verificar si es un número
+                if (isNaN(input)) {
+                    throw new TypeError("Debe ingresar un número válido.");
+                }
 
-            } catch (e) {
-                p.textContent = e.message; // Muestra el mensaje de error si no pasa alguna de las validaciones
-                p.style.color = "red";
-                
+                // Convertimos el valor a un número entero
+                const numeroEntero = parseInt(input, 10);
+
+                // Verificar que esté dentro del rango permitido
+                if (numeroEntero < 1 || numeroEntero > 40) {
+                    throw new RangeError("Número fuera de rango. Debe estar entre 1 y 40.");
+                }
+
+                // Verificar si es impar
+                if (numeroEntero % 2 === 0) {
+                    throw new Error("Debe ingresar un número impar.");
+                }
+
+                // Si todas las validaciones pasan, mostramos un mensaje de éxito
+                resultado.textContent = `Número válido: ${numeroEntero}`;
+                resultado.style.color = "green";
+
+            } catch (error) {
+                // Si ocurre un error, mostramos el mensaje correspondiente
+                resultado.textContent = `Error: ${error.message}`;
+                resultado.style.color = "red";
             }
+
+            // Limpiamos el campo de entrada después de validar
+            document.getElementById("numero").value = "";
+
+            // Prevenimos la recarga del formulario
+            return false;
         }
     </script>
 </body>
