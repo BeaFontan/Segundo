@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Función de Desconto</title>
+</head>
+<body>
+ <button onclick="calcularDesconto(100, 20)">Calcular Desconto</button>
+ <script>
+ function calcularDesconto(prezo, desconto) {
+
+    let totalDesconto = prezo * desconto / 100;
+    let prezoFinal = prezo-totalDesconto;
+
+    alert(prezoFinal);
+
+
+ }
+ </script>
+</body>
+</html>

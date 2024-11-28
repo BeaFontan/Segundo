@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Operadores Aritméticos</title>
+</head>
+<body>
+ <button onclick="calcularOperaciones()">Calcular Operacións</button>
+ <script>
+ function calcularOperaciones() {
+
+    let num1 = Number(prompt("Dime o primerio número"));
+    let num2 = Number(prompt("Dime o segundo número"));
+    
+    let suma = num1 + num2;
+    let resta = num1 - num2;
+    let multiplicacion = num1 * num2;
+    let division = num1 / num2;
+
+    alert("La suma es" + suma + "La resta es " + resta + "la multipliación es " + multiplicacion + "la división es" + division);
+
+ }
+ </script>
+</body>
+</html>
