@@ -10,7 +10,7 @@ try {
     echo "Erro na conexión" . $e->getMessage();
 }
 
-
+$arrayClientes;
 //Mostrar todos solo al cargar
 
 try{
@@ -25,31 +25,39 @@ try{
 }
 
 //Busqueda
-$botonBusqueda = isset($_get["botonBuscar"]);
-$buscarNombre = $_GET["buscarNome"];
-$buscarApelido = $_GET["buscarApelido"];
 
-if ($botonBusqueda) {
-    if ($buscarNombre) {
+if (isset($_GET["botonBuscar"])) {
+
+    $buscarNombre = $_GET["buscarNome"];
+    $buscarApelido = $_GET["buscarApelido"];
+
+    if (!empty($buscarNombre)) {
         try {
             $queryNome = $pdo->prepare("select * from cliente where nome like ?");
-            
+            echo $buscarNombre;
 
+            $queryNome->execute(array($buscarNombre)); 
 
+            $arrayClientes = $queryNome->fetchAll();
 
-
-        } catch (\Throwable $th) {
-            //throw $th;
+        } catch (PDOException $e) {
+            echo "Erro na búsqueda por nome" . $e->getMessage();
         }
     } 
 
-    if (condition) {
-        # code...
+    if (!empty($buscarApelido)) {
+        try {
+            $queryApelido = $pdo->prepare("select * from cliente where apelido like ?");
+
+            $queryApelido->execute(array($buscarApelido)); 
+            
+            $arrayClientes = $queryApelido->fetchAll();
+
+        } catch (PDOException $e) {
+            echo "Erro na búsqueda por nome" . $e->getMessage();
+        }
     }
-
 }
-
-$pdo->close();
 
 ?>
 
@@ -61,7 +69,7 @@ $pdo->close();
     <title>Document</title>
 </head>
 <body>
-    <form action="5.php" method="get">
+    <form action="busqueda.php" method="get">
 
         <table>
             <tr>
