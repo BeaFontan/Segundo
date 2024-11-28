@@ -10,9 +10,6 @@ function fecha() {
     console.log(mes+"/"+dia+"/"+anho);
     console.log(dia+"-"+mes+"-"+anho);
     console.log(dia+"/"+mes+"/"+anho);
-
-
-
 }
 
 fecha();
