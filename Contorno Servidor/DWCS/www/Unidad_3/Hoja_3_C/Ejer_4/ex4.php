@@ -94,8 +94,8 @@
 				} elseif ($_GET["select"] == "The Rolling Stones") {
 					$query= $conexion->prepare("SELECT * FROM tema where Autor like 'The Rolling Stones'");
 
-				} elseif ($_GET["select"] == "otros"){
-					$query = $conexion->prepare("SELECT * FROM tema where Autor not like 'The Beatles' and not like 'The Rolling Stones'");
+				} elseif ($_GET["select"] == "Otros"){
+					$query = $conexion->prepare("SELECT * FROM tema where Autor not like 'The Beatles' and Autor not like 'The Rolling Stones'");
 
 				}
 				break;
