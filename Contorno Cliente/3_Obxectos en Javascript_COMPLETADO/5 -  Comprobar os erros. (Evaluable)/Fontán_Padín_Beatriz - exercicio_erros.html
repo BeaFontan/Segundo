@@ -1,0 +1,78 @@
+<!--Beatriz Fontán Padín -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora</title>
+</head>
+<body>
+    <h1>Calculadora</h1>
+
+    <form id="calculadora" onsubmit="return calcular();">
+        <label for="operacion">Introduce la operación:</label>
+        <input type="text" id="operacion" placeholder="Ejemplo: 5+3" required>
+        <button type="submit">Calcular</button>
+    </form>
+
+    <p>Resultado: <span id="resultado">...</span></p>
+
+    <script>
+        function calcular() {
+            //constantes para recoger el valor introducir por la operación y mostrar el resultado 
+            const operacion = document.getElementById("operacion").value.trim();//elimino espacios al principio y al final
+            const resultado = document.getElementById("resultado");
+
+            try {
+                //Compruebo si hay un espacio en blanco
+                if (operacion === "") {
+                    throw new Error("El campo no puede estar vacío.");//lanzar error
+                }
+
+                // Validar que solo se introduzcan los operadores matemáticos y que sea un número
+                for (let caracter of operacion) {//recorro la operación caracter a carecter con for of
+                    if (!((caracter >= "0" && caracter <= "9") || "+-*/() .".includes(caracter))) {//si el caracter no es un número o caracteres matemáticos
+                        throw new Error("Caracteres no válidos. Solo números y operadores (+, -, *, /, ()).");//lanzar error
+                    }
+                }
+
+                // Comprobar que no no haya carecteres al principio y al final
+                let primerCaracter = operacion[0];//Almaceno el primer caracter
+                let ultimoCaracter = operacion[operacion.length - 1];//Almaceno el último caracter
+                if ("*/".includes(primerCaracter) || "+-*/".includes(ultimoCaracter)) {//Si estos caracteres son alguno de los matemáticos
+                    throw new Error(
+                        "No puede comenzar comenzar ni terminar con un operador (+, -, *, /)."//lanzar error
+                    );
+                }
+
+                //Comprobación de no dividir entre 0
+                if (operacion.includes("/0")) {//si se incluye la división del entre 0 en la operación
+                    throw new Error("No se puede dividir entre 0.");//lanzar error
+                }
+
+                //Una vez pasadas los comprobaciones de la operación, hacemos el eval().
+                const resultadoOperacion = eval(operacion);
+
+                // Comprobamos que el resultado de la operación sea un número válido
+                if (isNaN(resultadoOperacion)) {
+                    throw new Error("El resultado de la operación no es válido.");//lanzar error
+                }
+
+                //Muestro el resultado
+                resultado.textContent = resultadoOperacion;
+                resultado.style.color = "green";//En color verde
+
+            } catch (error) {
+                //Mostrar el error en caso de haberlo
+                resultado.textContent = "Error: " + error.message;
+                resultado.style.color = "red";//En color rojo
+            }
+
+            //Limpiamos el campo de entrada de usuario una vez mostrado el resultado.
+            document.getElementById("operacion").value = "";
+
+            //Impedimos que se recargue el formulario
+            return false;
+        }
+    </script>
+</body>
+</html>

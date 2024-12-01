@@ -1,0 +1,151 @@
+<!--Beatriz Fontán Padín -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>JavaScript</title>
+    <script type="text/javascript" src="EV_nativos.js"></script>
+</head>
+<body>
+    <noscript><p>JavaScript required</p></noscript>
+
+    <h1>Native Objects</h1>
+
+    <input type="text" id="name"/>
+    <input type="text" id="surname"/>
+
+    <button id="accion" onClick="changeName();">Cambiar Nombre!</button><br/>
+    </br>
+    <input type="text" id="birth" placeholder="dd/mm/aaaa"/>
+
+    <button id="accion" onClick="changeDate();">Calcular Fecha!</button>
+
+    <p>Nombre cambiado: <span style="font-weight:bold;" id="fullName">...</span></p>
+
+    <p>Edad calculada: <span style="font-weight:bold;" id="age">...</span></p>
+
+    <script>
+        /*Función que tranforma el nombre y apellidos del usuario, capturando el segundo nombre y el segundo apellido y mostrándolo
+         con la primera letra y punto, le quita las tildes y muestra todo en mayúsculas*/
+        function changeName() {
+            //Capturo los valoresque nos introduce el usuario en variables par poder utilizarlas después
+            let nombre = document.getElementById("name").value;
+            let apellidos = document.getElementById("surname").value;
+            const pRespuestaNombre = document.getElementById("fullName");
+
+            //primero ponemos a minusculas todos y eliminamos espacios de inicio y final por si el usuario los introduce
+            nombre = nombre.toLowerCase().trim();
+            apellidos = apellidos.toLowerCase().trim();
+
+            //Comprobamos que todos los campos estén cumplimentados
+            if (nombre === "" || apellidos.length === 0) {
+                alert("Todos los campos deben ser cumplimentados"); //Si no lo están mostramos un alert pidiendo que los cumplimenten
+
+            } else { //Si lo están, pasamos a transformar
+                //Designación de variables de nombre
+                let partesNombres = nombre.split(" ");//divido los nombres por el espacio y almaceno las partes en un array
+                let primerNombre = partesNombres[0];//capturo el primer nombre con la primera posición en el array
+                let segundoNombre = "";//Variable para almacenar el segundo nombre si da el caso
+
+                //Compruebo si hay un segundo nombre comprobando si el array tiene más de 1 posición
+                if (partesNombres.length > 1) {
+                    //si hay una segunda posición, la capturo como segundo nombre, me quedo solo con la primera letra y lo concateno con el punto.
+                    segundoNombre = partesNombres[1].charAt(0) + ".";
+                }
+
+                //Designación de variables de apellidos
+                let partesApellido = apellidos.split(" ");//divido los apellidos por el espacio y almaceno las partes en un array
+                let primerApellido = partesApellido[0]; //capturo el primer apellido con la primera posición en el array
+                let segundoApellido = ""; //Variable para almacenar el segundo apellido si da el caso
+
+                //Compruebo si hay un segundo apellido comprobando si el array tiene más de 1 posición
+                if (partesApellido.length > 1) {
+                    //si hay una segunda posición, la capturo como segundo apellido, me quedo solo con la primera letra y lo concateno con el punto.
+                    segundoApellido = partesApellido[1].charAt(0) + ".";
+                }
+                
+                let nombreFinal = primerNombre + " " + segundoNombre;//Junto los nombres ya transformados
+                let apellidosFinal = primerApellido + " " + segundoApellido; //Junto los apellidos ya transformados.
+
+                //Juntamos nombre y apellidos y seguimos tranformando. Quito el espacio final de apellidos por el caso de un solo apellido
+                let nombreCompletoTransformado = apellidosFinal.trim() + ", " + nombreFinal; 
+
+                //Pasamos a transformar el nombre como nos indican con las funciones necesarias
+                let respuesta = nombreCompletoTransformado.toUpperCase(); //A mayúsculas
+                
+                //Quitamos todas las tildes
+                respuesta = respuesta.replace(/Á/g, "A").replace(/É/g, "E").replace(/Í/g, "I").replace(/Ó/g, "O").replace(/Ú/g, "U");
+
+                pRespuestaNombre.textContent = respuesta; //Mostramos en el p el nombre y apellidos transformados.
+            }
+        }
+
+        //Función que obtiene la fecha de nacimiento de usuario y calcula la edad mostrando en años y meses
+        function changeDate() {
+            //capturamos los elementos para obtener los valores y mostrar respuesta
+            let fecha = document.getElementById("birth").value;
+            const pRespuestaEdad = document.getElementById("age");
+
+            let partes = fecha.split("/");//Divido la fecha en 3 partes por el /, lo cual he indicado en el placeholder que debe estar separado por /
+
+            // Verificar que tenga exactamente 3 partes
+            if (fecha.length !== 10) {//si la fecha es mayor a 10 caracteres
+                alert("Formato de fecha no correcto");
+                
+            } else if (partes.length !== 3) {//Si al dividir la fecha, no tiene 3 partes
+                alert("Formato de fecha no correcto");
+
+            } else {//Si ha pasado todas las comprobaciones
+                // capturo cada parte de la fecha para poder trabajar individualmente con cada una
+                let dia = parseInt(partes[0], 10);
+                let mes = parseInt(partes[1], 10);
+                let anio = parseInt(partes[2], 10);
+
+                // Valido que el usuario ha introducido números y no otra cosa
+                if (isNaN(dia) || isNaN(mes) || isNaN(anio)) {
+                    alert("Formato de fecha no válido. Asegúrate de usar números y dividir cada parte de la fecha con /.");
+
+                } else {//Si son números y ha pasado la comprobación
+
+                    // Verifico que los número introducidos son correctos según el totoal de días, meses y años.
+                    if (dia < 1 || dia > 31 || mes < 1 || mes > 12 || anio < 0) {
+                        alert("Fecha incorrecta. Revisa el día, mes y año.");
+
+                    } else {//Si los número están en el rango correcto, paso a tranformar
+                        //convertimos la fecha introducida en un objeto date
+                        let fechaNacimiento = new Date(anio, mes - 1, dia); // el mes menos 1 porque va de 0 a 11
+
+                        //Comprobamos que la fecha introducida sea correcta para evitar un 31 de febrero por ejemplo
+                        if ( fechaNacimiento.getDate() !== dia || fechaNacimiento.getMonth() !== mes - 1 || fechaNacimiento.getFullYear() !== anio) {
+                            alert("La fecha no es válida. Revisa el día, mes y año.");
+
+                        } else {//Si la fecha es correcta
+                         
+                            //Obtengo la fecha actual
+                            let hoy = new Date();
+
+                            //Calculo la edad en años
+                            let anhos = hoy.getFullYear() - fechaNacimiento.getFullYear();
+
+                            //Calculo los meses
+                            let meses = hoy.getMonth() - fechaNacimiento.getMonth();
+
+                            //si el mes es menor a actual (0) o si el mes es el actual la fecha de hoy es menor que la fecha de nacimiento 
+                            if (meses < 0 || (meses === 0 && hoy.getDate() < fechaNacimiento.getDate())) { //Si no ha llegado el mes
+                                anhos--; //Resto un año
+                                meses += 12; //Ajusto los meses
+                            }
+
+                            //Si el día actual es menor al día de nacimiento, descontamos un mes
+                            if (hoy.getDate() < fechaNacimiento.getDate()) {
+                                meses--;
+                            }
+
+                            pRespuestaEdad.textContent = anhos + " anos e " + meses + " meses.";// Muestro el resultado
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
