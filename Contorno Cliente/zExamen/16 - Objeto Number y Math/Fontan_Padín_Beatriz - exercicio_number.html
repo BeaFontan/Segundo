@@ -1,0 +1,39 @@
+<!--Beatriz Fontán Padín -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>JavaScript</title>
+    <script type="text/javascript" src="TA_math.js"></script>
+</head>
+<body>
+    <noscript><p>JavaScript required</p></noscript>
+    <h1>Number & Math</h1>
+    <button id="action" onClick="calc();">Calculate</button>
+    <h2 id="result">...</h2>
+
+<script>
+//Meto todo dentro de la función calcular para ser llamada por el evento en click, que se llama por el botón
+function calc(){
+    const h2 = document.getElementById("result") //Almaceno en una constante el elemento html donde voy a mostrar el resultado, que es capturado por el id del h2.
+    let numeros = [];//declaración del array para almacenar los 10 números
+    const PI = 3.1416; //Constante para almacenar el número PI
+    
+    // utilizamos un bucle con 10 repeticiones para generar los 10 n´meros
+    for (let i = 0; i < 10; i++) {
+        numeros[i] = Math.floor(Math.random() * 100); //usamos Math.ramdom para generar números aleatorios, y redondeamos cno floor para que sean números enteros.
+    }
+    
+    let mayor = Math.max.apply(null, numeros);//Cogemos el mayor con la función máx de Math para coger el número mayor
+    
+    let area = PI * Math.pow(mayor, 2);//calculamos el area y usaos el pow para elevar a 2.
+    
+    area = area.toFixed(2); // Redondeamos a 2 decimales el resultado
+    
+    // Mostrar resultados concatenados con el textContent
+    h2.textContent = `Números generados: ${numeros} Número ${mayor} Area: ${area}`;
+}
+
+</script>
+
+</body>
+</html>

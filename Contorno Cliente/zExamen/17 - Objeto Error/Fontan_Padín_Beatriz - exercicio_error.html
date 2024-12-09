@@ -1,0 +1,64 @@
+<!--Beatriz Fontán Padín -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Validación de Números</title>
+</head>
+<body>
+    <h1>Validación de Números</h1>
+    <form id="numeroForm" onsubmit="return validarNumero();">
+        <label for="numero">Introduce un número:</label>
+        <input type="text" id="numero" placeholder="Ejemplo: 1+5">
+        <button type="submit">Validar</button>
+    </form>
+    <p>Resultado: <span id="resultado">...</span></p>
+
+    <script>
+        function validarNumero() {
+            const input = document.getElementById("numero").value.trim(); // Obtenemos el valor del input
+            const resultado = document.getElementById("resultado"); // Elemento para mostrar el resultado
+
+            try {
+                // Verificar si el campo está vacío
+                if (input === "") {
+                    throw new Error("El campo no puede estar vacío.");
+                }
+
+                // Verificar si es un número
+                if (isNaN(input)) {
+                    throw new TypeError("Debe ingresar un número válido.");
+                }
+
+                // Convertimos el valor a un número entero
+                const numeroEntero = parseInt(input, 10);
+
+                // Verificar que esté dentro del rango permitido
+                if (numeroEntero < 1 || numeroEntero > 40) {
+                    throw new RangeError("Número fuera de rango. Debe estar entre 1 y 40.");
+                }
+
+                // Verificar si es impar
+                if (numeroEntero % 2 === 0) {
+                    throw new Error("Debe ingresar un número impar.");
+                }
+
+                // Si todas las validaciones pasan, mostramos un mensaje de éxito
+                resultado.textContent = `Número válido: ${numeroEntero}`;
+                resultado.style.color = "green";
+
+            } catch (error) {
+                // Si ocurre un error, mostramos el mensaje correspondiente
+                resultado.textContent = `Error: ${error.message}`;
+                resultado.style.color = "red";
+            }
+
+            // Limpiamos el campo de entrada después de validar
+            document.getElementById("numero").value = "";
+
+            // Prevenimos la recarga del formulario
+            return false;
+        }
+    </script>
+</body>
+</html>
