@@ -16,10 +16,7 @@ function ordenarAutor($pinturas) {
 }
 
 function ordenarTitulo($pinturas){
-    uksort($pinturas, function($a,$b){
-        return strcmp($a,$b);
-    });
-    
+    ksort($pinturas);
     return $pinturas;
 }
 

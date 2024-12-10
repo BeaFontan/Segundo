@@ -221,11 +221,9 @@ if (isset($_GET["boton"])) {
                     </tr>";
                 $cuenta +=1;
             }
-
         }
         ?>
     </table>
-
     <?php echo "<p>Mostrados "  . $cuenta . " de un total de " . $totalFilas ."</p>";?>
 </body>
 </html>
