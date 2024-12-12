@@ -1,4 +1,6 @@
-// Beatriz Fontán Padín
+/*Facer un programa que pida un texto ó usuario e o converta nun array bidimensional de palabras e letras
+ (emprega a función splitLetters que se proporciona). O array débese percorrer cun bucle while para as palabras e un bucle 
+ for para as letras de cada palabra, para conseguir o mesmo texto sen as vocais e mostralo nunha ventá emerxente.*/
 
 let texto = prompt("Dime un texto");//VAriable para recoger el texto introducido por el usuario
 let arrayPalabras = texto.split(' '); // Dividimos el texto en palabras

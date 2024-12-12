@@ -1,4 +1,4 @@
-//Beatriz Fontán Padín
+//Facer un programa que pida a nota numérica dun alumno e a mostre nunha ventá emerxente en forma de texto (Sobresaliente, Notable, Ben, Suficiente, Insuficiente), empregando if-else if-else.
 
 let nota;//Declaración de variable
 

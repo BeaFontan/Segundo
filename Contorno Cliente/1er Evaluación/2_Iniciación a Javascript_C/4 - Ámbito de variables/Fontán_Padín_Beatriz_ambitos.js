@@ -1,4 +1,4 @@
-//Ambito global
+//Probar a execución de varias expresións con ou sen parénteses (()), para comprobar a precedencia de uns operadores sobre outros.
 var variable = 12;
 
 variable = "Azul";

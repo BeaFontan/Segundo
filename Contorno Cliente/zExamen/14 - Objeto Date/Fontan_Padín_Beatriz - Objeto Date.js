@@ -1,5 +1,5 @@
 
-// Beatriz Fontán Padín
+//Crear un script que calcule a diferencia de días entre dúas datas. Estas poden ser introducidas en milisegundos ou nun formato de texto válido.
 
 // Solicitar las fechas al usuario
 const fechaInicio = prompt("Introduce la primera fecha (en milisegundos o en un formato de texto válido como 'YYYY-MM-DD'):");

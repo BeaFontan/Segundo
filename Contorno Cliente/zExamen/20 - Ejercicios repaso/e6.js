@@ -1,3 +1,5 @@
+/*Write a JavaScript program to calculate number of days left until next Christmas.*/
+
 function navidad() {
     
 let hoy = new Date();

@@ -1,4 +1,4 @@
-//Beatriz Fontán Padín
+//Crear exemplos en JavaScript de todos os tipos de conversión e móstraos por consola.
 
 //Designación de variable
 let variable = "3"

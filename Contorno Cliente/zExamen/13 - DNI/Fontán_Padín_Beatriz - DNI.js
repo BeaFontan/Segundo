@@ -1,5 +1,9 @@
 
-// Beatriz Fontán Padín
+//Facer un programa que pida por ó usuario un nº de DNI e mostre nunha ventá emerxente a letra que lle corresponde. Para obter o resultado
+// haberá obter o resto de dividir o nº entre 23 e comparalo coa seguinte táboa:
+//Figura 1: Cálculo da letra do DNI
+//Será preciso tamén comprobar os posibles erros na introdución de datos: lonxitude de 8 díxitos e que se introduza un nº.
+
 
 // Tabla de letras para devolver al usuario según el cálculo
 const letrasDNI = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'];

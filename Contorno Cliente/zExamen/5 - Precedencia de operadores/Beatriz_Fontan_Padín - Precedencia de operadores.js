@@ -1,4 +1,4 @@
-//Beatriz Fontán Padín
+//Probar a execución de varias expresións con ou sen parénteses (()), para comprobar a precedencia de uns operadores sobre outros.
 
 //Designación de variables
 let $numero1 = 5;

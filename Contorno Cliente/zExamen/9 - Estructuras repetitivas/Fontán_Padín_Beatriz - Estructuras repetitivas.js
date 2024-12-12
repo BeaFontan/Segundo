@@ -1,5 +1,4 @@
-//Beatriz Fontán Padín
-
+//Facer un programa que pida un texto ó usuario e o percorra para mostrar nunha ventá emerxente o mesmo texto sen as vocais, empregando os bucles while, do-while e for, e a sentencia continue.
 
 //Bucle for
 

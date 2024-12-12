@@ -1,4 +1,5 @@
-//Beatriz Fontán Padín
+/*Facer un programa que pida un texto ó usuario, cree un array coas letras do texto (coa función split) e
+ percorra o array para mostrar nunha ventá emerxente o mesmo texto sen as vocais, empregando os bucles for-of e for-in, e a sentencia continue.*/
 
 //For-in
 
