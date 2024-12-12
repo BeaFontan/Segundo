@@ -2,102 +2,154 @@
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>JavaScript</title>
-    <script type="text/javascript" src="TA_strings.js"></script>
-</head>
-<body>
-    <h1>Métodos de strings</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Probar Métodos de Strings</title>
+  </head>
+  <body>
+    <h1>Probar Métodos de Strings</h1>
 
     <input type="text" id="a" placeholder="Primera cadena" />
     <input type="text" id="b" placeholder="Segunda cadena" /><br />
 
-    <!-- Botones para ejecutar la acción correspondiente -->
-    <input type="submit" name="boton" value="Length" onclick="execute('length')" />
-    <input type="submit" name="boton" value="Concat" onclick="execute('concat')" />
-    <input type="submit" name="boton" value="Trim" onclick="execute('trim')" />
-    <input type="submit" name="boton" value="To Upper Case" onclick="execute('toUpperCase')" />
-    <input type="submit" name="boton" value="Char At" onclick="execute('charAt')" />
-    <input type="submit" name="boton" value="From Char Code" onclick="execute('fromCharCode')" />
-    <input type="submit" name="boton" value="Index Of" onclick="execute('indexOf')" />
-    <input type="submit" name="boton" value="Substr" onclick="execute('substr')" />
-    <input type="submit" name="boton" value="Compare" onclick="execute('compare')" />
-    <input type="submit" name="boton" value="Split" onclick="execute('split')" />
-    <input type="submit" name="boton" value="Search" onclick="execute('search')" />
-    <input type="submit" name="boton" value="Match" onclick="execute('match')" />
-    <input type="submit" name="boton" value="Replace" onclick="execute('replace')" />
+    <button onClick="myLength();">Length</button>
+    <button onClick="myConcat();">Concat</button>
+    <button onClick="myTrim();">Trim</button>
+    <button onClick="myToUpperCase();">To Upper Case</button>
+    <button onClick="myCharAt();">Char At</button>
+    <button onClick="myFromCharCode();">From Char Code</button>
+    <button onClick="myIndexOf();">Index Of</button>
+    <button onClick="mySubstr();">Substr</button>
+    <button onClick="myCompare();">Compare</button>
+    <button onClick="mySplit();">Split</button>
+    <button onClick="mySearch();">Search</button>
+    <button onClick="myMatch();">Match</button>
+    <button onClick="myReplace();">Replace</button>
 
     <h2 id="result">Resultado:</h2>
 
     <script>
-      // Variables para almacenar los textos del usuario
-      let texto1, texto2;
+      // Variables globales que obtienen los valores de los campos de texto
+      let strA, strB;
 
-      // Actualizar los valores de las cadenas de texto
+      // Función para actualizar las variables globales
       function updateStrings() {
-        texto1 = document.getElementById("a").value;
-        texto2 = document.getElementById("b").value;
+        strA = document.getElementById("a").value;
+        strB = document.getElementById("b").value;
       }
 
-      // Función principal que ejecuta la operación correspondiente en el switch
-      function execute(boton) {
+      // Función para obtener la longitud de las cadenas
+      function myLength() {
+        updateStrings();
+        const result = `Longitud de la primera cadena: ${strA.length}, Longitud de la segunda cadena: ${strB.length}`;
+        document.getElementById("result").textContent = result;
+      }
+
+      // Función para concatenar las dos cadenas
+      function myConcat() {
+        updateStrings();
+        const result = `Concatenado: ${strA.concat(strB)} `;
+        document.getElementById("result").textContent = result;
+      }
+
+      // Función para eliminar espacios al principio y final de la primera cadena
+      function myTrim() {
+        updateStrings();
+        const result = `Primera cadena sin espacios: ${strA.trim()}`;
+        document.getElementById("result").textContent = result;
+      }
+
+      // Función para convertir la primera cadena a mayúsculas
+      function myToUpperCase() {
+        updateStrings();
+        const result = `Primera cadena en mayúsculas: ${strA.toUpperCase()}`;
+        document.getElementById("result").textContent = result;
+      }
+
+      // Función para obtener el carácter en una posición de la primera cadena
+      function myCharAt() {
         updateStrings();
 
-        // Variable para almacenar el resultado final a mostrar
-        let resultado = "";
+        const result = `Carácter en posición 2 de la primera cadena: ${strA.charAt(
+          b - 1
+        )}`;
+        document.getElementById("result").textContent = result;
+      }
 
-        // Switch para cada caso
-        switch (boton) {
-          case 'length':
-            resultado = `Longitud de la primera cadena: ${texto1.length}, Longitud de la segunda cadena: ${texto2.length}`;
-            break;
-          case 'concat':
-            resultado = `Concatenado: ${texto1.concat(texto2)}`;
-            break;
-          case 'trim':
-            resultado = `Primera cadena sin espacios: ${texto1.trim()}`;
-            break;
-          case 'toUpperCase':
-            resultado = `Primera cadena en mayúsculas: ${texto1.toUpperCase()}`;
-            break;
-          case 'charAt':
-            const position = texto2 - 1 || 0;
-            resultado = `Carácter en posición ${position + 1} de la primera cadena: ${texto1.charAt(position)}`;
-            break;
-          case 'fromCharCode':
-            const codigo = 212;
-            resultado = `Carácter del código 212: ${String.fromCharCode(codigo)}`;
-            break;
-          case 'indexOf':
-            resultado = `Índice de 'a': ${texto1.indexOf("a")}`;
-            break;
-          case 'substr':
-            resultado = `Subcadena de (2, 3): ${texto1.substr(2, 3)}`;
-            break;
-          case 'compare':
-             const coincidencias = texto1.match(/a/g);
-            resultado = coincidencias ? 
-                `Coincidencias con la expresión /a/g: ${coincidencias}` : 
-                "No se encontraron coincidencias con la expresión /a/g";
-            break;
-          case 'split':
-            resultado = `División por espacios: ${texto1.split(" ")}`;
-            break;
-          case 'search':
-            resultado = `Índice de 'a': ${texto1.search("a")}`;
-            break;
-          case 'match':
-            resultado = `Coincidencias con la expresión /a/g: ${texto1.match(/a/g)}`;
-            break;
-          case 'replace':
-            resultado = `Reemplazo de o por e: ${texto1.replace(/o/g, "e")}`;
-            break;
-        }
+      // Función para obtener el carácter desde su código ASCII
+      function myFromCharCode() {
+        const code = 65;
+        const result = `Carácter del código 65: ${String.fromCharCode(code)}`;
+        document.getElementById("result").textContent = result;
+      }
+      // Función para encontrar la primera aparición de una subcadena en la primera cadena
+      function myIndexOf() {
+        updateStrings();
+        const result = `Índice de 'a' en la primera cadena: ${strA.indexOf(
+          "a"
+        )}`;
+        document.getElementById("result").textContent = result;
+      }
 
-        // Mostrar el resultado en el elemento de resultado
-        document.getElementById("result").textContent = resultado;
+      // Función para extraer una subcadena de la primera cadena
+      function mySubstr() {
+        updateStrings();
+        const start = 1;
+        const length = 4;
+        const result = `Subcadena de la primera cadena (1, 4): ${strA.substr(
+          start,
+          length
+        )}`;
+        document.getElementById("result").textContent = result;
+      }
+
+      // Función para comparar dos cadenas
+      function myCompare() {
+        updateStrings();
+        const result =
+          strA === strB
+            ? "Las cadenas son iguales"
+            : "Las cadenas son diferentes";
+        document.getElementById("result").textContent = result;
+      }
+
+      // Función para dividir la primera cadena en un array por espacios
+      function mySplit() {
+        updateStrings();
+        const result = `Primera cadena dividida por espacios: ${strA.split(
+          " "
+        )}`;
+        document.getElementById("result").textContent = result;
+      }
+
+      // Función para buscar una subcadena en la primera cadena (devuelve índice)
+      function mySearch() {
+        updateStrings();
+        const result = `Índice de la búsqueda de 'a' en la primera cadena: ${strA.search(
+          "a"
+        )}`;
+        document.getElementById("result").textContent = result;
+      }
+
+      // Función para usar match con una expresión regular en la primera cadena
+      function myMatch() {
+        updateStrings();
+        const result = `Coincidencias con la expresión regular /a/g: ${strA.match(
+          /a/g
+        )}`;
+        document.getElementById("result").textContent = result;
+      }
+
+      // Función para reemplazar una subcadena en la primera cadena
+      function myReplace() {
+        updateStrings();
+        const result = `Reemplazando 'a' por 'o' en la primera cadena: ${strA.replace(
+          /a/g,
+          "o"
+        )}`;
+        document.getElementById("result").textContent = result;
       }
     </script>
-</body>
+  </body>
 </html>

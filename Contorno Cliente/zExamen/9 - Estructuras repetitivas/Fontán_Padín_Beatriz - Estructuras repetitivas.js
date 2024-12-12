@@ -46,7 +46,7 @@ while (i < texto3.length) {
     // Si el texto contine una vocal 
     if ("aeiou".includes(texto3[i])) {
         i++;//aumenta la variable de control
-        continue; //y continua con la siguiente comprobación
+        continue; //y continua con la siguiente comprobación al while, ignora la asignación de la vocal en el resultado.
     }
 
     // Si encuentra una vocal
