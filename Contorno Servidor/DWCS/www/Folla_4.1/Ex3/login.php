@@ -1,3 +1,33 @@
+<?php
+    session_start();
+
+    if (isset($_POST["botonLogin"])) {
+
+        $usuarioLogin = $_POST["textUsuario"];
+        $contrasianlLogin = $_POST["textContrasinal"];
+
+        $datos = array("nome" => $usuarioLogin, "constrasinal" => $contrasianlLogin);
+
+        $_SESSION["datos"] = $datos;
+       
+        try {
+            $pdo = new PDO("mysql:host=dbXDebug;dbname=Empresa;charset=utf8", $usuarioLogin, $contrasianlLogin);
+            
+            $conexion = true;
+    
+        } catch (PDOException $e) {
+            $conexion = false;
+        }
+
+        if ($conexion) {
+            header("location:datos.php");
+            
+        }else{
+            echo "Erro nas credenciales, introdúceas de novo";
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,19 +43,5 @@
         <button type="submit" name="botonLogin">Login</button>
 
     </form>
-
-    <?php
-
-        if (isset($_POST["botonLogin"])) {
-
-            $usuarioLogin = $_POST["textUsuario"];
-            $contrasianlLogin = $_POST["textContrasinal"];
-           
-
-            
-
-
-        }
-    ?>
 </body>
 </html>
