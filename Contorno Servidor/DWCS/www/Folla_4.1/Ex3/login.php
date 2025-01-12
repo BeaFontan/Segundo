@@ -10,6 +10,7 @@
 
         $_SESSION["datos"] = $datos;
        
+        //Esta conexión la hago aquí aparte para controlar los boleanos
         try {
             $pdo = new PDO("mysql:host=dbXDebug;dbname=Empresa;charset=utf8", $usuarioLogin, $contrasianlLogin);
             

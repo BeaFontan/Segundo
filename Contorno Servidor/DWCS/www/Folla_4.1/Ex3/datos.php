@@ -34,6 +34,7 @@
         ?>
     </form>
 
+    <!-- Saludar al usuario conectado -->
     <p>Holi <?php echo $_SESSION["datos"]["nome"] ?></p>
 
     <table>
@@ -45,15 +46,10 @@
         </tr>
         <tr>
             <?php
-                try {
-                    $pdo = new PDO("mysql:host=dbXDebug;dbname=Empresa;charset=utf8", $_SESSION["datos"]["nome"], $_SESSION["datos"]["constrasinal"]);
-                    $pdo->setAttribute(PDO::ERRMODE_EXCEPTION, PDO::ATTR_ERRMODE);
-                    //echo "Conexión realizada";
-                
-                } catch (PDOException $e) {
-                    echo "Erro na conexión " . $e->getMessage();
-                }
+                //Inclusión de la conexión a la base
+                include("conexion.php");
 
+                //Mostrar todos
                 try {
                     $query = $pdo->query("Select * from cliente");
 
@@ -66,6 +62,7 @@
                 }
 
 
+                //Botones de ordenar
                 if (isset($_POST["boton"])) {
                     switch ($_POST["boton"]) {
                         case 'ordenarEmpresa':
@@ -101,10 +98,12 @@
                     }
                 }
 
-                if ($mensaxe =! "") {
-                    echo "<p>$mensaxe</p>";
+                //Mostrar mensaje de insercción en engadeRexistro.php si existe
+                if (isset($_GET["mensaxe"])) {
+                    echo "<p>".$_GET["mensaxe"]."</p>";
                 }
 
+                //Mostrar datos
                 if ($arrayClientes) {
                     foreach ($arrayClientes as $cliente) {
                         echo "<tr>

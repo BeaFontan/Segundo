@@ -9,13 +9,7 @@
 
     if (isset($_POST["botonAgregar"])) {
 
-        try {
-            $pdo = new PDO("mysql:host=dbXDebug;dbname=Empresa;charset=utf8", $_SESSION["datos"]["nome"], $_SESSION["datos"]["constrasinal"]);
-            $pdo->setAttribute(PDO::ERRMODE_EXCEPTION, PDO::ATTR_ERRMODE);
-        
-        } catch (PDOException $e) {
-            $mensaxe =  "Erro na conexión " . $e->getMessage();
-        }
+        include("conexion.php");
 
         $numero = $_POST["textNumero"];
         $nome = $_POST["textNome"];
