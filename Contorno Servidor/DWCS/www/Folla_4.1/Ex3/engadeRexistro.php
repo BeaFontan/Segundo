@@ -1,11 +1,11 @@
 <?php
     session_start();
 
-    $registroEnBase = "";
-
+    //Evitar que entren sin logearse
     if (!isset($_SESSION["datos"])) {
         header("location:login.php");
     }
+
 
     if (isset($_POST["botonAgregar"])) {
 
@@ -27,6 +27,7 @@
             $mensaxe =  "Erro insertando" . $e->getMessage();
         }
 
+        //Redirigir a la página datos con el mensaje de insercción
         header("location:datos.php?mensaxe=$mensaxe");
         exit;
 
