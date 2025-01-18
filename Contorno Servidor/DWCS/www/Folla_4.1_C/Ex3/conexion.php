@@ -11,7 +11,7 @@
         //echo "Conexión realizada";
     
     } catch (PDOException $e) {
-        echo "Erro na conexión " . $e->getMessage();
+        $mensaxe= "Erro na conexión " . $e->getMessage();
     }
 
 

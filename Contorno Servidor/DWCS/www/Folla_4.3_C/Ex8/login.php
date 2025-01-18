@@ -34,7 +34,7 @@ $fila = $stmt->fetch();
 
 if ($stmt->rowCount() == 1) //HAI UN USUARIO
     $contrasinalBD = $fila[0];
-    $passTecleado = $_SERVER['PHP_AUTH_PW'];
+$passTecleado = $_SERVER['PHP_AUTH_PW'];
 
 // COMPROBAMOS QUE O HASH GARDADO É COMPATIBLE CO TECLEADO.
 //TEMOS QUE COMPROBAR ANTES QUE HAI ALGÚN USUARIO:
