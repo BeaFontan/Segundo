@@ -11,7 +11,6 @@
         <input type="text" name="txtApelido" placeholder="Apelido"></br>
         <input type="text" name="txtEmail" placeholder="email"></br>
         <button type="submit" name="btnEnviar">Enviar</button>
-        
     </form>
 </body>
 </html>
