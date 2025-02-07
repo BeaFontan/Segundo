@@ -1,6 +1,6 @@
 <?php
 
-include("conexion.php");
+include_once("conexion.php");
 
 //Crear admin se non existe
 try {
@@ -36,15 +36,18 @@ if (isset($_GET["mensaxe"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-    <a href="rexistro.html">Rexistrarse</a>
+    <div class=".container">
+        <a class="registro-link" href="rexistro.php">Rexistrarse</a>
 
-    <form action="validalogin.php" method="post">
-        <input type="text" name="txtEmailLogin" placeholder="Email" required>
-        <input type="password" name="txtContrasinalLogin" placeholder="Contrasinal" required>
-        <button type="submit" name="btnLogin">Login</button>
-    </form>
+        <form action="validalogin.php" method="post">
+            <input type="text" name="txtEmailLogin" placeholder="Email" required>
+            <input type="password" name="txtContrasinalLogin" placeholder="Contrasinal" required>
+            <button type="submit" name="btnLogin">Login</button>
+        </form>
+    </div>
 
 </body>
 </html>
