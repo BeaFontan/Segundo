@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 include_once("conexion.php");
@@ -9,14 +8,16 @@ function validarLogin($pdo, $email)
     try {
         $query = $pdo->prepare("Select * from usuarios where email like ?");
         $query->execute([$email]);
-        return $query->fetch();
+        $user = $query->fetch();
+        return $user ?: "Non se atopa o usuario";
     
     } catch (PDOException $e) {
         return "Erro validando login" . $e->getMessage();
     }  
 }
 
-function actualizarUltimaConexion($pdo, $user){
+function actualizarUltimaConexion($pdo, $user)
+{
     $ultimaConexion = Date("Y-m-d H:i:s");
 
     try {
@@ -36,7 +37,7 @@ if (isset($_POST["btnLogin"])) {
 
         $user = validarLogin($pdo, $email);
 
-        if (empty($user)) {
+        if (is_string($user) == true) {
             $mensaxe = $user;
             header("location:login.php?mensaxe=$mensaxe");
             exit;
@@ -55,6 +56,7 @@ if (isset($_POST["btnLogin"])) {
                 ];
 
                 $_SESSION["datos"] = $datos; 
+
                 header("location:mostra.php");
                 exit;
 
@@ -65,9 +67,10 @@ if (isset($_POST["btnLogin"])) {
             }
         }
     } catch (PDOException $e) {
-        $mensaxe = "Erro buscando admin" . $e->getMessage();
+        $mensaxe = "Erro buscando usuario" . $e->getMessage();
     }
-} else {
+}else {
     header("location:login.php");
     exit;
 }
+

@@ -2,26 +2,31 @@
 
 include_once("conexion.php");
 
-//Crear admin se non existe
-try {
-    $query = $pdo->prepare("Select nome from usuarios where nome like ?");
-    $query->execute(["admin"]);
-    $admin = $query->fetch();
-
-    if (empty($admin)) {
-        try {
-            $query = $pdo->prepare("INSERT INTO `usuarios`(`email`, `contrasinal`, `rol`, `nome`, `apelido1`) VALUES (?,?,?,?,?)");
-            $query->execute(["admin@admin.com", password_hash("abc123.", PASSWORD_DEFAULT), "administrador", "admin", "admin"]);
-        } catch (PDOException $e) {
-            $mensaxe = "Erro creando admin" . $e->getMessage();
-        }
+function comprobarEmailExistente($pdo, $email)
+{
+    try {
+        $query = $pdo->prepare("Select email from usuarios where email like ?");
+        $query->execute([$email]);
+        return $query->fetch();
+     
+    } catch (PDOException $e) {
+        return "Erro buscando email existente" . $e->getMessage();
     }
-} catch (PDOException $e) {
-    $mensaxe = "Erro buscando admin" . $e->getMessage();
+}
+
+function insertarUsuario($pdo, $email, $contrasinal, $rol, $nome, $apelido1, $apelido2)
+{
+    try {
+        $query = $pdo->prepare("INSERT INTO `usuarios`(`email`, `contrasinal`, `rol`, `nome`, `apelido1`, `apelido2`) VALUES (?,?,?,?,?,?)");
+        $query->execute([$email, $contrasinal, $rol, $nome, $apelido1, $apelido2]);
+        return "Usuario registrado correctamente";
+
+    } catch (PDOException $e) {
+        return "Erro no rexistro" . $e->getMessage();
+    }
 }
 
 
-//Registro
 if (isset($_POST["btnEnviarRexistro"])) {
     $nome = htmlspecialchars($_POST["txtNomeRexistro"]);
     $apelido1 = htmlspecialchars($_POST["txtApelido1Rexistro"]);
@@ -30,34 +35,24 @@ if (isset($_POST["btnEnviarRexistro"])) {
     $contrasinal = htmlspecialchars(password_hash($_POST["txtContrasinalRexistro"], PASSWORD_DEFAULT));
     $rol = "usuario";
 
-    //comprobar que no se repita email
-    try {
-        $query = $pdo->prepare("Select email from usuarios where email like ?");
-        $query->execute([$email]);
-        $user = $query->fetch();
+    $emailExistente = comprobarEmailExistente($pdo, $email);
 
-        if (!empty($user)) {
-            $mensaxe = "O email xa está rexistrado";
-            header("location:login.php?mensaxe=$mensaxe");
+    if (!empty($emailExistente)) {
+        $mensaxe = "O email xa está rexistrado";
+        header("location:rexistro.php?mensaxe=$mensaxe");
+        exit;
+
+    } else {
+        $mensaxe = insertarUsuario($pdo, $email, $contrasinal, $rol, $nome, $apelido1, $apelido2);
+
+        if (str_contains($mensaxe, 'Erro')) {
+            header("location:rexistro.html?mensaxe=$mensaxe");
             exit;
-
-        }else{
-            try {
-                $query = $pdo->prepare("INSERT INTO `usuarios`(`email`, `contrasinal`, `rol`, `nome`, `apelido1`, `apelido2`) VALUES (?,?,?,?,?,?)");
-                $query->execute([$email, $contrasinal, $rol, $nome, $apelido1, $apelido2]);
-                header("location:login.php");
-                exit;
-
-            } catch (PDOException $e) {
-                $mensaxe = "Erro no rexistro" . $e->getMessage();
-                header("location:rexistro.html?mensaxe=$mensaxe");
-                exit;
-            }
+        } else {
+            header("location:login.php");
+            exit;
         }
-    } catch (PDOException $e) {
-        $mensaxe = "Erro buscando email existente" . $e->getMessage();
     }
-
 } else {
     header("location:login.php");
     exit;

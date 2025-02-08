@@ -101,7 +101,6 @@ include("conexion.php");
                         <form action="mostra.php" method="post">
                             <button type="submit" name="botonEliminar" value="'.$usuario[0].'">Eliminar</button>
                         </form>';
-
                     
                     $nomeERoldeUsuario = "$usuario[3],$usuario[0]";
                     $formularioRol='
