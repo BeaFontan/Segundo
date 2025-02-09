@@ -11,6 +11,14 @@
         <div class="login">
             <h2>Login</h2>
             <form action="validalogin.php" method="post">
+                <label for="idioma">Selecciona o teu idioma:</label>
+
+                <select name="selectIdioma">
+                    <option value="castellano">Castellano</option>
+                    <option value="galego">Galego</option>
+                    <option value="ingles">English</option>
+                </select>
+
                 <input type="text" name="txtEmailLogin" placeholder="Email" required>
                 <input type="password" name="txtContrasinalLogin" placeholder="Contrasinal" required>
                 <button type="submit" name="btnLogin">Login</button>

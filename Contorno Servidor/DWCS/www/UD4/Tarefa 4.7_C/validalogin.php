@@ -8,21 +8,21 @@ function validarLogin($pdo, $email)
     try {
         $query = $pdo->prepare("Select * from usuarios where email like ?");
         $query->execute([$email]);
-        $user = $query->fetch();
-        return $user ?: "Non se atopa o usuario";
+        $usuario = $query->fetch();
+        return $usuario ?: "Non se atopa o usuario";
     
     } catch (PDOException $e) {
         return "Erro validando login" . $e->getMessage();
     }  
 }
 
-function actualizarUltimaConexion($pdo, $user)
+function actualizarUltimaConexion($pdo, $usuario)
 {
     $ultimaConexion = Date("Y-m-d H:i:s");
 
     try {
         $query = $pdo->prepare("UPDATE `usuarios` SET `ultima_conexion`= ? WHERE id = ?");
-        $query->execute([$ultimaConexion, $user]);
+        $query->execute([$ultimaConexion, $usuario]);
     
     } catch (PDOException $e) {
         return "Erro validando login" . $e->getMessage();
@@ -34,25 +34,30 @@ if (isset($_POST["btnLogin"])) {
     try {
         $email = htmlspecialchars($_POST["txtEmailLogin"]);
         $contrasinal = htmlspecialchars($_POST["txtContrasinalLogin"]);
+        $idioma = $_POST["selectIdioma"] ?? "castellano";
 
-        $user = validarLogin($pdo, $email);
+        $usuario = validarLogin($pdo, $email);
 
-        if (is_string($user) == true) {
-            $mensaxe = $user;
+        if (is_string($usuario) == true) {
+            $mensaxe = $usuario;
             header("location:login.php?mensaxe=$mensaxe");
             exit;
             
         } else {
-            $contrasinalCorrecto = password_verify($contrasinal, $user["contrasinal"]);
+            $contrasinalCorrecto = password_verify($contrasinal, $usuario["contrasinal"]);
 
             if ($contrasinalCorrecto) {
 
-                $mensaxe = actualizarUltimaConexion($pdo,$user["id"]);
+                $mensaxe = actualizarUltimaConexion($pdo,$usuario["id"]);
 
+                session_regenerate_id(true); 
+                
+                setcookie("idioma_usuario", $idioma, time() + 604800);
+                
                 $datos = [
-                    "id" => $user["id"],
-                    "rol" => $user["rol"], 
-                    "nome" => $user["nome"]
+                    "id" => $usuario["id"],
+                    "rol" => $usuario["rol"], 
+                    "nome" => $usuario["nome"]
                 ];
 
                 $_SESSION["datos"] = $datos; 

@@ -1,12 +1,17 @@
 <?php
 session_start();
 
-include_once("xestionaRoles.php");
+if (!isset($_SESSION['marcadecontrol'])) {
+    session_regenerate_id(true);
+    $_SESSION['marcadecontrol'] = true;
+}
 
-if (!isset($_SESSION["datos"])) {
+if (!isset($_SESSION["datos"]) || strcmp($_SESSION["datos"]["rol"], "administrador") != 0) {
     header("location:login.php");
     exit;
 }
+
+include_once("xestionaRoles.php");
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +33,7 @@ if (!isset($_SESSION["datos"])) {
 
     </form>
 
+    <div class="titulos">
     <h2>
         <?php
             if (!empty($mensaxe)) {
@@ -40,6 +46,7 @@ if (!isset($_SESSION["datos"])) {
             }
         ?>
     </h2>
+    </div>
 
     <div>
         <table>

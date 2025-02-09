@@ -1,10 +1,4 @@
 <?php
-
-if (!isset($_SESSION["datos"])) {
-    header("location:login.php");
-    exit;
-}
-
 include_once("conexion.php");
 
 function recuperarProductos($pdo)

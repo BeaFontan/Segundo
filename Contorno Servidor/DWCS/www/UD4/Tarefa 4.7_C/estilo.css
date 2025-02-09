@@ -12,8 +12,6 @@ button {
     padding: 10px 20px;
     font-size: 16px;
     border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
 }
 
 button:hover {
@@ -24,6 +22,14 @@ button:hover {
 /* Todos los títulos */
 h2 {
     color: #bb175c;  
+}
+
+.titulos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 
@@ -72,7 +78,7 @@ h2 {
     border-radius: 12px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     width: 500px;
-    height: 350px;
+    height: 400px;
     padding: 15px;
     text-align: center;
     display: flex;
@@ -92,7 +98,7 @@ h2 {
 }
 
 
-/* Link Registro */
+/* Links */
 .link {
     color: #bb175c; 
     font-size: 15px;
@@ -125,15 +131,13 @@ h2 {
     background: white;
     border-radius: 12px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
     width: 250px;
     padding: 15px;
     text-align: center;
-    transition: transform 0.2s ease-in-out;
+    overflow: hidden;
 }
 
 .card img {
-    width: 100%;
     height: 250px;
     object-fit: fill;
 }
@@ -142,6 +146,7 @@ h2 {
     margin: 10px 0;
     font-size: 16px;
     color: #333;
+    height: 50px;
 }
 
 /* Caja Comentarios */
@@ -151,7 +156,8 @@ h2 {
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* Administrador */
@@ -194,4 +200,40 @@ select {
     border: 1px solid #ccc;
     border-radius: 5px;
     border-color: #bb175c;
+}
+
+
+/* Moderador */
+.comentarioModerador {
+    background: #f1f1f1;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.textoComentario {
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.buttonAprobar {
+    background-color: #bb175c;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 5px; 
+    margin-bottom: 15px; 
+}
+
+.buttonAprobar:hover {
+    background-color: #380319;
 }
