@@ -9,12 +9,14 @@ class Planeta {
     private float $distancia;
     private static int $numPlanetasAccesibles = 0;
 
+    public const CONSTANTE = 1;
+
     public function __construct($nome, $tamaño, $distancia) {
         $this->nome = $nome;
         $this->tamaño = $tamaño;
         $this->accesible = true;
         $this->distancia = $distancia;
-        $numPlanetasAccesibles++;
+        self::$numPlanetasAccesibles++;
     }
 
     public function setNome($nome):void
@@ -32,7 +34,7 @@ class Planeta {
         $this->tamaño = $tamaño;
     }
 
-    public function getTamaño():string
+    public function getTamaño():int
     {
         return $this->tamaño;
     }
@@ -42,15 +44,21 @@ class Planeta {
         $this->distancia = $distancia;
     }
 
-    public function getDistancia():string
+    public function getDistancia():float
     {
         return $this->distancia;
+    }
+
+
+    public function getNumPlanetas():int
+    {
+        return self::$numPlanetasAccesibles;
     }
 
     public function explotou():void
     {
         $this->accesible = false;
-        $numPlanetasAccesibles--;
+        self::$numPlanetasAccesibles--;
     }
   
 }
@@ -73,7 +81,7 @@ class PlanetaHabitable extends Planeta{
         $this->numPersoas = $numPersoas;
     }
 
-    public function getNumPersoas():string
+    public function getNumPersoas():int
     {
         return $this->numPersoas;
     }
@@ -83,7 +91,7 @@ class PlanetaHabitable extends Planeta{
         $this->temperaturaMinima = $temperaturaMinima;
     }
 
-    public function getTemperaturaMinima():string
+    public function getTemperaturaMinima():float
     {
         return $this->temperaturaMinima;
     }
@@ -93,21 +101,18 @@ class PlanetaHabitable extends Planeta{
         $this->temperaturaMaxima = $temperaturaMaxima;
     }
 
-    public function getTemperaturaMaxima():string
+    public function getTemperaturaMaxima():float
     {
         return $this->temperaturaMaxima;
     }
 
     public function listarTodo():string
     {
-        return "Nome: ".getNome() .
-               "Tamaño: ".getTamaño() .
-               "Distancia: ".getDistancia() .
-
-
-               
-        
-        ", Tamaño: $Num personas: $numPersoas, Temperatura Máxima:$temperaturaMaxima, Temperatura mínima: $temperaturaMinima";
+        return "Nome: ".$this->getNome() .
+               "Tamaño: ".$this->getTamaño() .
+               "Distancia: ".$this->getDistancia() .
+               "Número de planetas".$this->getNumPlanetas();
+               "Personas: $numPersoas, Temperatura Máxima:$temperaturaMaxima, Temperatura mínima: $temperaturaMinima";
     }
 }
 
@@ -118,7 +123,6 @@ class PlanetaHostil extends Planeta{
 
     public function __construct($nome, $tamaño, $distancia, $vida, $fontesEnerxia ){
         parent::__construct($nome, $tamaño, $distancia);
-        $this->numPersoas = $numPersoas;
         $this->vida = $vida;
         $this->fontesEnerxia = $fontesEnerxia;
     }
@@ -145,10 +149,39 @@ class PlanetaHostil extends Planeta{
 
     public function listarTodo():string
     {
-        return "Vida: $vida, Fontes:$fontesEnerxia";
+        return "Nome: ".$this->getNome() .
+        "Tamaño: ".$this->getTamaño() .
+        "Distancia: ".$this->getDistancia() .
+        "Número de planetas".$this->getNumPlanetas();
+       "Vida:$vida, Fontes Enerxía: $fontesEnerxia";
     }
-
 }
 
 
+$planetaHabitable = new PlanetaHabitable("Fión", 24, 1.5, 100000000, 0, 10);
+echo $planetaHabitable->listarTodo();
+
+
+$planetaHabitable->setdistancia(50);
+
+$planetaHabitable->setNome("Sión cambiado");
+
+echo $planetaHabitable->listarTodo();
+
+
+
+$planetaHostil= new PlanetaHostil("Kaleva", 50, 0.4, true, true);
+echo $planetaHabitable->listarTodo();
+
+
+
+$planetaHostil->explotou();
+echo $planetaHabitable->listarTodo();
+
+
+$planeta = new Planeta("nome", 10, 10);
+
+echo "Esta es la constante" .$planeta::CONSTANTE;
+
 ?>
+
