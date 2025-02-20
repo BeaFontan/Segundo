@@ -12,8 +12,10 @@ abstract class Calculo {
 
     abstract public function setOperando2($operando2);
 
+    abstract public function Calcular();
+
     abstract public function getResultado();
 
-    abstract public function Calcular($operando1, $operando2);
+
 
 }
