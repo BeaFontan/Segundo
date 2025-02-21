@@ -1,11 +1,13 @@
 <?php
 
 declare(strict_types=1);
+include_once("Comparar.php");
 
-class Artigo {
+class Artigo implements Comparar{
 
     private int $id;
     private string $nome;
+    private float $prezo;
 
     public function __construct($id, $nome)
     {
@@ -18,6 +20,15 @@ class Artigo {
         $this->id++;
     }
 
+    public function setPrezo(float $prezo)
+    {
+        $this->prezo = $prezo;
+    }
+
+    public function comparar($prezo)
+    {
+
+    }
 
     public function __set($atributo, $valor) : void
     {
@@ -41,7 +52,7 @@ class Artigo {
 
     public function __tostring():string
     {
-        return "ID: ". $this->id ."Nome: " . $this->nome;
+        return "ID: ". $this->__get($id) ."Nome: " . $this->__get($nome) ."Prezo: " . $this->prezo;
     }
 }
 
