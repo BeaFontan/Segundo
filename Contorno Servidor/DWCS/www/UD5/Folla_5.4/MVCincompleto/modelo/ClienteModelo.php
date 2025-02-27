@@ -47,19 +47,32 @@ class ClienteModelo extends Cliente
   }
 
 
+  public function crear($nome, $email, $apelidos): string
+  {
+    $conexion = new Conexion();
 
-  public static function borrar(): string
+    try {
+        $pdoStmt = $conexion->prepare("INSERT INTO `clientes`(`nome`, `apelidos`, `email`) VALUES (?,?,?)");
+        $pdoStmt->execute([$nome, $email, $apelidos]);
+    } catch (PDOException $e) {
+        die ("Erro creando". $e->getMessage());
+    }
+
+    return "Creación hecha";
+  }
+
+  public function borrar($cliente): string
   {
     $pdo = new Conexion();
 
     try {
-        $query = $pdo->prepare("DELETE FROM `clientes` WHERE name = ?"); 
-        $query->execute();
+        $query = $pdo->prepare("DELETE FROM clientes WHERE nome = ?"); 
+        $query->execute([$cliente]);
 
     } catch (PDOException $e) {
-        die ("Houbo un erro en devolveTodos". $e->getMessage());
+        die ("Houbo un erro eliminando". $e->getMessage());
     }
 
-    return "Cliente borrado con exito";
+    return "Eliminación correcta";
   }
 }
