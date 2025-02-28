@@ -10,28 +10,6 @@ class ClienteModelo extends Cliente
         parent::__construct($nome,$apelidos,$email);
     }
 
-
-  /* PARA Insertar un obxecto*/ 
-  public function guardar(): bool
-  {
-     $conexion = new Conexion();
-  
-     try {
-        $pdoStmt = $conexion->prepare('INSERT INTO ' . self::TABLA .' (nome, apelidos,email) VALUES(:nome, :apelidos, :email)');
-        $pdoStmt->bindParam(':nome', $this->nome);
-        $pdoStmt->bindParam(':apelidos', $this->apelidos);
-        $pdoStmt->bindParam(':email', $this->email);
-        $pdoStmt->execute();
-     } catch (PDOException $e) {
-         die ("Houbo un erro coa inserción: ". $e->getMessage());
-     }
-
-     $conexion = null;
-     return true;
-  }
-
-
-
   //DEVOLVE un array con todos os clientes da táboa. Método de clase
   public static function devolveTodos() : PDOStatement
   {
@@ -46,19 +24,63 @@ class ClienteModelo extends Cliente
       return $pdoStmt;
   }
 
+    public function buscarPorEmail() : PDOStatement 
+    {
+        $conexion = new Conexion();
+        try {
+            $query = $conexion->prepare("select * from clientes where email like ?");;
+            
+            $pdoStmt = $query->execute([$this->email]);
+  
+        } catch (PDOException $e) {
+            die ("Houbo un erro en query". $e->getMessage());
+        }
+        return $query;
+    }
 
-  public function crear($nome, $email, $apelidos): string
+
+  public function crear(): string
   {
     $conexion = new Conexion();
 
     try {
         $pdoStmt = $conexion->prepare("INSERT INTO `clientes`(`nome`, `apelidos`, `email`) VALUES (?,?,?)");
-        $pdoStmt->execute([$nome, $email, $apelidos]);
+        $pdoStmt->execute([$this->nome, $this->apelidos, $this->email]);
+
     } catch (PDOException $e) {
         die ("Erro creando". $e->getMessage());
     }
 
     return "Creación hecha";
+  }
+
+  public function editarPorEmail($clienteEditar) : string
+  {
+    $conexion = new Conexion();
+    try {
+        $query = $conexion->prepare("UPDATE `clientes` SET `nome`=?,`apelidos`=?,`email`=? WHERE nome like ?");
+        $pdoStmt = $query->execute([$this->nome, $this->apelidos, $this->email, $clienteEditar]);
+    }catch (PDOException $e) {
+            die ("Erro creando". $e->getMessage());
+        }
+    
+        return "Edición hecha";
+  }
+
+
+  public function borrarEmail() : string
+  {
+    $pdo = new Conexion();
+
+    try {
+        $query = $pdo->prepare("DELETE FROM clientes WHERE email = ?"); 
+        $query->execute([$this->email]);
+
+    } catch (PDOException $e) {
+        die ("Houbo un erro eliminando por email". $e->getMessage());
+    }
+
+    return "Eliminación correcta";
   }
 
   public function borrar($cliente): string
@@ -75,4 +97,6 @@ class ClienteModelo extends Cliente
 
     return "Eliminación correcta";
   }
+
+
 }
