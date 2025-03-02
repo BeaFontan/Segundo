@@ -128,7 +128,7 @@ if (isset($_GET["boton"])) {
         }
 		
 	?>
-<article>
+</article>
 <article>
 	<form action="ex4.php" method="get">
 
