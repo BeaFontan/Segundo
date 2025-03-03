@@ -1,0 +1,10 @@
+services:
+  apache:
+    container_name: contex7
+    build: .
+    ports: 
+      - 5000:80
+    
+    volumes:
+      - ./www:/var/www/html
+    

@@ -1,0 +1,7 @@
+services:
+  apache:
+    image: imaxepropia
+    ports:
+      - 8001:80
+    volumes:
+      - ./www:/var/www/html
