@@ -1,0 +1,8 @@
+services:
+  apache2:
+    build: .
+    container_name: contex8
+    ports:
+      - 8002:80
+    volumes:
+      - ./www:/var/www/localhost/htdocs

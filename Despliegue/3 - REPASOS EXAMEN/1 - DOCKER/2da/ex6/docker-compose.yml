@@ -1,0 +1,8 @@
+services:
+  apache:
+    image: apachepropio
+    container_name: contex6
+    ports:
+      - 8001:80
+    volumes:
+      - ./www:/var/www/html
