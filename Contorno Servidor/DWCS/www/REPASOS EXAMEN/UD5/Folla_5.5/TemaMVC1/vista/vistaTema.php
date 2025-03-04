@@ -108,6 +108,31 @@
             }
         }
     }
+
+    // function mostrarDatosHTML(array $temas): void
+    // {
+    //     if (!empty($temas)) {
+    //         foreach ($temas as $tema) {
+    //             // Accedemos a los datos mediante getters
+    //             $srcImaxe = !empty($tema->getImaxe()) ? "imaxes/{$tema->getImaxe()}.jpg" : "imaxes/default.jpg";
+
+    //             echo "<article id='contenedor'>
+    //                 <div class='tema'>
+    //                     <img src='$srcImaxe' alt='Imagen de {$tema->getTitulo()}'><br>
+    //                     <div><strong>Título:</strong> {$tema->getTitulo()}</div>
+    //                     <div><strong>Autor:</strong> {$tema->getAutor()}</div>
+    //                     <div><strong>Año:</strong> {$tema->getAno()}</div>
+    //                     <div><strong>Duración:</strong> {$tema->getDuracion()} min</div>
+    //                 </div>
+    //             </article>";
+    //         }
+    //     } else {
+    //         echo "<p>No hay temas disponibles.</p>";
+    //     }
+    // }
+
     ?>
+
+
 </body>
 </html>

@@ -100,5 +100,33 @@ class TemaModelo extends Tema
 
         return $arrayTemas;
     }
+
+    // public static function mostrarTodos(): array
+    // {
+    //     $pdo = new Conexion();
+    //     $temas = [];
+
+    //     try {
+    //         $query = $pdo->prepare("SELECT * FROM tema");
+    //         $query->execute();
+    //         $resultados = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    //         // Convertimos cada resultado en un objeto Tema
+    //         foreach ($resultados as $fila) {
+    //             $temas[] = new Tema(
+    //                 $fila['Titulo'],
+    //                 $fila['Autor'],
+    //                 (int)$fila['Ano'],
+    //                 (int)$fila['Duracion'],
+    //                 $fila['Imaxe']
+    //             );
+    //         }
+    //     } catch (PDOException $e) {
+    //         echo "Erro en mostrar Todos: " . $e->getMessage();
+    //     }
+
+    //     return $temas;
+    // }
+
 }
 
