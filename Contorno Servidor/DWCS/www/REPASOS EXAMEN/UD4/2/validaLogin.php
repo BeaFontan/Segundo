@@ -42,7 +42,7 @@ if (isset($_POST["btnLogin"])) {
         exit();
 
     } else {
-        $contrasinalCorrecto = password_verify($pass, $usuario["contrasinal"]);
+        $contrasinalCorrecto = password_verify($pass, $usuario["contrasinalsdf"]);
 
         if (!$contrasinalCorrecto) {
             $mensaxe = "Contrasinal incorrecto";
